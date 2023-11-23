@@ -19,6 +19,7 @@ import java.util.Set;
                 query="SELECT m FROM Maquina m")
 })
 
+@Entity
 public class Maquina {
 
     //Atributos
@@ -36,6 +37,9 @@ public class Maquina {
     //El JoinColumn es para indicar que va a ser una FK en el relacional
     @JoinColumn (nullable=false, unique=false)
     private Cliente propietario;
+
+    //Constructor sin parámetros
+    public Maquina () { }
 
     //Getters
     public Long getIdMaquina() { return idMaquina; }

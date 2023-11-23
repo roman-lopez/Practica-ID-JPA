@@ -34,6 +34,12 @@ public abstract class Persona {
     @Column(nullable = true, unique=true)
     private String email;
 
+
+    //Constructor sin parámetros
+    public Persona () { }
+
+
+
     //Getters
     public Long getIdPersona() { return idPersona; }
     public String getNif() { return nif; }

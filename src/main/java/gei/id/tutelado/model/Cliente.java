@@ -1,12 +1,10 @@
 package gei.id.tutelado.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 public class Cliente extends Persona {
 
     //Atributos
@@ -18,6 +16,9 @@ public class Cliente extends Persona {
 
     @OneToMany(mappedBy="propietario", fetch= FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.REMOVE} )
     private Set<Maquina> maquinas = new HashSet<Maquina>();
+
+    //Constructor sin parámetros
+    public Cliente () { }
 
     //Getters
     public String getTipoCliente() { return tipoCliente; }
@@ -54,7 +55,7 @@ public class Cliente extends Persona {
             throw new RuntimeException ("ERROR: La maquina no pertenece al cliente");
 
         //Actualizamos lado propietario
-        maquina.setPropietario(null);       //TODO revisar esta linea
+        maquina.setPropietario(null);       //Cuando llamemos a este caso de uso, gestionar este NULL porque en SQL no puede haber NULL si es obligatorio
         //Actualizamos lado inverso
         this.maquinas.remove(maquina);
     }

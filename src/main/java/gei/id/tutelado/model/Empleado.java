@@ -1,12 +1,14 @@
 package gei.id.tutelado.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 public class Empleado extends Persona {
 
     //Atributos
@@ -18,6 +20,11 @@ public class Empleado extends Persona {
 
     @ManyToMany(cascade={}, fetch= FetchType.LAZY)
     private Set<Maquina> maquinas = new HashSet<Maquina>();
+
+    //Constructor sin parámetros
+    public Empleado () { }
+
+
 
     //Getters
     public LocalDateTime getFechaContratacion() { return fechaContratacion; }
