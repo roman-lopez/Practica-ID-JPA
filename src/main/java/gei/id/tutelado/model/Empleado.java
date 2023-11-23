@@ -1,12 +1,17 @@
 package gei.id.tutelado.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+
+
+@NamedQueries({
+        @NamedQuery (name="Empleado.numeroCobraMasDe1500",
+                query="SELECT COUNT(e) FROM Empleado e WHERE e.salario > 1500 ORDER BY salario"),
+        @NamedQuery (name="Empleado.recuperaMaquinas",
+                query="SELECT u FROM Usuario u ORDER BY u.nif")
+})
 
 @Entity
 public class Empleado extends Persona {
