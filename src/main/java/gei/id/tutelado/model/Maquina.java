@@ -1,8 +1,6 @@
 package gei.id.tutelado.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 
 @TableGenerator(name="generadorIdsMaquinas", table="tabla_ids",
