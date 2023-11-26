@@ -1,6 +1,7 @@
-package gei.id.tutelado.dao;
+package gei.id.tutelado.dao.maquina;
 
 import gei.id.tutelado.configuracion.Configuracion;
+import gei.id.tutelado.dao.maquina.MaquinaDao;
 import gei.id.tutelado.model.Cliente;
 import gei.id.tutelado.model.Maquina;
 
@@ -8,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
-public class MaquinaDaoJPA implements MaquinaDao{
+public class MaquinaDaoJPA implements MaquinaDao {
 
     private EntityManagerFactory emf;
     private EntityManager em;

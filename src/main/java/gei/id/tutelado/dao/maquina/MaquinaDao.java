@@ -1,4 +1,4 @@
-package gei.id.tutelado.dao;
+package gei.id.tutelado.dao.maquina;
 
 import gei.id.tutelado.configuracion.Configuracion;
 import gei.id.tutelado.model.*;

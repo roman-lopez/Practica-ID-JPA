@@ -1,14 +1,13 @@
-package gei.id.tutelado.dao;
+package gei.id.tutelado.dao.persona;
 
 import gei.id.tutelado.configuracion.Configuracion;
 import gei.id.tutelado.model.Persona;
-import org.hibernate.LazyInitializationException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
-public class PersonaDaoJPA implements PersonaDao{
+public class PersonaDaoJPA implements PersonaDao {
 
     private EntityManagerFactory emf;
     private EntityManager em;

@@ -1,13 +1,10 @@
-package gei.id.tutelado.dao;
+package gei.id.tutelado.dao.empleado;
 
 import gei.id.tutelado.configuracion.Configuracion;
+import gei.id.tutelado.dao.persona.PersonaDao;
 import gei.id.tutelado.model.Empleado;
-import gei.id.tutelado.model.Persona;
 
-import java.util.List;
-import java.util.Set;
-
-public interface EmpleadoDao extends PersonaDao{
+public interface EmpleadoDao extends PersonaDao {
 
 
     @Override

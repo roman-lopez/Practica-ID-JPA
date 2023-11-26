@@ -9,7 +9,7 @@ public class ConfiguracionJPA implements Configuracion {
 	
 	@Override
 	public void start() {
-		emf = Persistence.createEntityManagerFactory("TuteladoPU");
+		emf = Persistence.createEntityManagerFactory("TuteladoIDHugoRoman");
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package gei.id.tutelado.dao;
+package gei.id.tutelado.dao.empleado;
 
 import java.util.List;
 import java.util.Set;
@@ -6,8 +6,9 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import gei.id.tutelado.dao.empleado.EmpleadoDao;
+import gei.id.tutelado.dao.persona.PersonaDaoJPA;
 import gei.id.tutelado.model.Empleado;
-import gei.id.tutelado.model.Usuario;
 import org.hibernate.LazyInitializationException;
 
 import gei.id.tutelado.configuracion.Configuracion;
@@ -105,8 +106,9 @@ public class EmpleadoDaoJPA extends PersonaDaoJPA implements EmpleadoDao {
                 em.close();
                 throw (ex);
             }
+
+            return (empleados.size() != 0 ? empleados.get(0) : null);
         }
-        return (resultado.size() != 0 ? resultado : null);
     }
 
     @Override

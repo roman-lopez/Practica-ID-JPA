@@ -1,13 +1,13 @@
-package gei.id.tutelado.dao;
-
-import java.util.List;
+package gei.id.tutelado.dao.cliente;
 
 import gei.id.tutelado.configuracion.Configuracion;
+import gei.id.tutelado.dao.persona.PersonaDao;
 import gei.id.tutelado.model.Cliente;
 
-public interface ClienteDao {
+public interface ClienteDao extends PersonaDao {
 
     void setup (Configuracion config);
 
-
+    @Override
+    Cliente recuperaPorNif (String nif);
 }
