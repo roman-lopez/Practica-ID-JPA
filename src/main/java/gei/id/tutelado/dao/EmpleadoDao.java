@@ -8,12 +8,20 @@ import java.util.Set;
 
 public interface EmpleadoDao {
 
+    void setup (Configuracion config);
+
+    //QUERIES ADICIONALES
+    Long numeroCobraMasDe1500();
+
+    List<Object[]> recuperaMaquinasAsignadas();
+
+    // OPERACIONES POR ATRIBUTOS LAZY
     Empleado restauraMaquinas(Empleado empleado);
 
-    Integer numeroCobraMasDe1500(Set<Empleado> empleados);
 
 
-    void setup (Configuracion config);
+
+
 
     // OPERACIONS POR ATRIBUTOS LAZY
     //Usuario restauraEntradasLog (Usuario user);
