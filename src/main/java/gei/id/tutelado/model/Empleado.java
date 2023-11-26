@@ -8,9 +8,11 @@ import java.util.Set;
 
 @NamedQueries({
         @NamedQuery (name="Empleado.numeroCobraMasDe1500",
-                query="SELECT COUNT(e) FROM Empleado e WHERE e.salario > 1500 ORDER BY salario"),
-        @NamedQuery (name="Empleado.recuperaMaquinas",
-                query="SELECT u FROM Usuario u ORDER BY u.nif")
+                query="SELECT COUNT(e) FROM Empleado e WHERE e.salario > 1500\""),
+        //@NamedQuery (name="Empleado.recuperaMaquinas",
+        //        query="SELECT u FROM Usuario u ORDER BY u.nif"),
+        @NamedQuery(name = "Empleado.recuperaMaquinasAsignadas",
+                query = "SELECT e, m FROM Empleado e LEFT JOIN e.maquinas m ORDER BY e.idPersona")
 })
 
 @Entity
@@ -24,6 +26,9 @@ public class Empleado extends Persona {
     private Double salario;
 
     @ManyToMany(cascade={}, fetch= FetchType.LAZY)
+    @JoinTable (name="t_emp_maq",
+                joinColumns = @JoinColumn(name="idPersona"),
+                inverseJoinColumns = @JoinColumn(name="idMaquina"))
     private Set<Maquina> maquinas = new HashSet<Maquina>();
 
     //Constructor sin parámetros

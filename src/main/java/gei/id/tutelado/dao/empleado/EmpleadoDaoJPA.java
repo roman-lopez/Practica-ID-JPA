@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 import gei.id.tutelado.model.Empleado;
-import gei.id.tutelado.model.Persona;
 import gei.id.tutelado.model.Usuario;
 import org.hibernate.LazyInitializationException;
 
@@ -64,15 +63,15 @@ public class EmpleadoDaoJPA extends PersonaDaoJPA implements EmpleadoDao {
     }
 
     @Override
-    public Integer numeroCobraMasDe1500() {
-        List<Empleado> empleados = null;
+    public Long numeroCobraMasDe1500() {
+       Long resultado = null;
 
         // Tengo que hacer una List de empleados en vez de Set porque el getResultList() devuelve una lista
         try {
             em = emf.createEntityManager();
             em.getTransaction().begin();
 
-            empleados = em.createNamedQuery("Empleado.numeroCobraMasDe1500", Empleado.class).getResultList();
+            resultado = em.createNamedQuery("Empleado.numeroCobraMasDe", Long.class).getSingleResult();
 
             em.getTransaction().commit();
             em.close();
@@ -83,9 +82,31 @@ public class EmpleadoDaoJPA extends PersonaDaoJPA implements EmpleadoDao {
                 em.close();
                 throw (ex);
             }
-
-            return (empleados.size() != 0 ? empleados.get(0) : null);
         }
+        return resultado;
+    }
+
+    public List<Object[]> recuperaMaquinasAsignadas() {
+        List<Object[]> resultado = null;
+
+        // Tengo que hacer una List de Objects en vez de Set porque el getResultList() devuelve una lista
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+
+            resultado = em.createNamedQuery("Empleado.recuperaMaquinasAsignadas", Object[].class).getResultList();
+
+            em.getTransaction().commit();
+            em.close();
+
+        } catch (Exception ex) {
+            if (em != null && em.isOpen()) {
+                if (em.getTransaction().isActive()) em.getTransaction().rollback();
+                em.close();
+                throw (ex);
+            }
+        }
+        return (resultado.size() != 0 ? resultado : null);
     }
 
     @Override
@@ -113,3 +134,4 @@ public class EmpleadoDaoJPA extends PersonaDaoJPA implements EmpleadoDao {
         return (empleados.size()!=0?empleados.get(0):null);
     }
 }
+
