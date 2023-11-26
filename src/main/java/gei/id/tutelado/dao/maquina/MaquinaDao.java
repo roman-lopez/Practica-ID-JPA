@@ -17,4 +17,5 @@ public interface MaquinaDao {
 
     //QUERIES ADICIONALES
     List<Maquina> recuperaTodasPropietario(Cliente c);
+    List<Maquina> recuperaMaquinasEmpresa();
 }

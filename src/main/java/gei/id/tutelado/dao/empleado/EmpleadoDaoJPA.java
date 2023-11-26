@@ -7,13 +7,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 import gei.id.tutelado.model.Empleado;
+import gei.id.tutelado.model.Persona;
 import gei.id.tutelado.model.Usuario;
 import org.hibernate.LazyInitializationException;
 
 import gei.id.tutelado.configuracion.Configuracion;
 
 
-public class EmpleadoDaoJPA implements EmpleadoDao {
+public class EmpleadoDaoJPA extends PersonaDaoJPA implements EmpleadoDao {
 
     private EntityManagerFactory emf;
     private EntityManager em;
@@ -63,7 +64,7 @@ public class EmpleadoDaoJPA implements EmpleadoDao {
     }
 
     @Override
-    public Integer numeroCobraMasDe1500(List<Empleado> empleados) {
+    public Integer numeroCobraMasDe1500() {
         List<Empleado> empleados = null;
 
         // Tengo que hacer una List de empleados en vez de Set porque el getResultList() devuelve una lista
@@ -85,5 +86,30 @@ public class EmpleadoDaoJPA implements EmpleadoDao {
 
             return (empleados.size() != 0 ? empleados.get(0) : null);
         }
+    }
+
+    @Override
+    public Empleado recuperaPorNif(String nif) {
+        List<Empleado> empleados=null;
+
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+
+            empleados = em.createNamedQuery("Empleado.recuperaPorNif", Empleado.class).setParameter("nif", nif).getResultList();
+
+            em.getTransaction().commit();
+            em.close();
+
+        }
+        catch (Exception ex ) {
+            if (em!=null && em.isOpen()) {
+                if (em.getTransaction().isActive()) em.getTransaction().rollback();
+                em.close();
+                throw(ex);
+            }
+        }
+
+        return (empleados.size()!=0?empleados.get(0):null);
     }
 }

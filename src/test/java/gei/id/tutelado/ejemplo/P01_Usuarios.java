@@ -2,8 +2,8 @@ package gei.id.tutelado;
 
 import gei.id.tutelado.configuracion.ConfiguracionJPA;
 import gei.id.tutelado.configuracion.Configuracion;
-import gei.id.tutelado.dao.UsuarioDao;
-import gei.id.tutelado.dao.UsuarioDaoJPA;
+import gei.id.tutelado.dao.ejemplo.UsuarioDao;
+import gei.id.tutelado.dao.ejemplo.UsuarioDaoJPA;
 import gei.id.tutelado.model.Usuario;
 
 //import org.apache.log4j.Logger;

@@ -2,15 +2,19 @@ package gei.id.tutelado.dao;
 
 import gei.id.tutelado.configuracion.Configuracion;
 import gei.id.tutelado.model.Empleado;
+import gei.id.tutelado.model.Persona;
 
 import java.util.List;
 import java.util.Set;
 
-public interface EmpleadoDao {
+public interface EmpleadoDao extends PersonaDao{
 
     Empleado restauraMaquinas(Empleado empleado);
 
-    Integer numeroCobraMasDe1500(Set<Empleado> empleados);
+    Integer numeroCobraMasDe1500();
+
+    @Override
+    Empleado recuperaPorNif (String nif);
 
 
     void setup (Configuracion config);

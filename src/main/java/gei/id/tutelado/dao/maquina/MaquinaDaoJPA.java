@@ -132,4 +132,30 @@ public class MaquinaDaoJPA implements MaquinaDao{
 
         return maquinas;
     }
+
+    @Override
+    public List<Maquina> recuperaMaquinasEmpresa() {
+        List <Maquina> maquinas=null;
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+
+            maquinas = em.createNamedQuery("Maquina.recuperaMaquinasEmpresa", Maquina.class).getResultList();
+
+            em.getTransaction().commit();
+            em.close();
+
+        }
+        catch (Exception ex ) {
+            if (em!=null && em.isOpen()) {
+                if (em.getTransaction().isActive()) em.getTransaction().rollback();
+                em.close();
+                throw(ex);
+            }
+        }
+
+        return maquinas;
+    }
+
+
 }
