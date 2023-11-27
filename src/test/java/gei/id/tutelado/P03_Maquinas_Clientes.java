@@ -344,8 +344,8 @@ public class P03_Maquinas_Clientes {
         log.info("Acceso a maquinas de cliente");
         try	{
             Assert.assertEquals(2, c.getMaquinas().size());
-            Assert.assertEquals(generadorEjemplos.m0, c.getMaquinas().iterator().next());
-            Assert.assertEquals(generadorEjemplos.m1, c.getMaquinas().iterator().next());
+            Assert.assertTrue(c.getMaquinas().contains(generadorEjemplos.m0));
+            Assert.assertTrue(c.getMaquinas().contains(generadorEjemplos.m1));
             excepcion=false;
         } catch (LazyInitializationException ex) {
             excepcion=true;
@@ -357,17 +357,17 @@ public class P03_Maquinas_Clientes {
         log.info("Probando carga forzada de coleccion LAZY ------------------------------------------------------------------------");
 
         c = clienteDao.recuperaPorNif(generadorEjemplos.c0.getNif());   // Cliente c con proxy sin inicializar
-        /*c = clienteDao.re(u);						// Cliente c con proxy ya inicializado
+        c = clienteDao.restauraMaquinas(c);						// Cliente c con proxy ya inicializado
 
-        Assert.assertEquals(2, u.getEntradasLog().size());
-        Assert.assertEquals(produtorDatos.e1A, u.getEntradasLog().first());
-        Assert.assertEquals(produtorDatos.e1B, u.getEntradasLog().last());
+        Assert.assertEquals(2, c.getMaquinas().size());
+        Assert.assertTrue(c.getMaquinas().contains(generadorEjemplos.m0));
+        Assert.assertTrue(c.getMaquinas().contains(generadorEjemplos.m1));
 
         log.info("");
         log.info("Probando acceso a referencia EAGER ------------------------------------------------------------------------------");
 
-        e = logDao.recuperaPorCodigo(produtorDatos.e1A.getCodigo());
-        Assert.assertEquals(produtorDatos.u1, e.getUsuario());*/
+        m = maquinaDao.recuperaPorCodigo(generadorEjemplos.m0.getCodMaquina());
+        Assert.assertEquals(generadorEjemplos.c0, m.getPropietario());
     }
     /*
     @Test
