@@ -21,7 +21,7 @@ public class Cliente extends Persona {
     @ElementCollection
     private Set<Long> telefonos = new HashSet<Long>();
 
-    @OneToMany(mappedBy="propietario", fetch= FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.REMOVE} )
+    @OneToMany(mappedBy="propietario", fetch= FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.REMOVE} )
     private Set<Maquina> maquinas = new HashSet<Maquina>();
 
     //Constructor sin parámetros

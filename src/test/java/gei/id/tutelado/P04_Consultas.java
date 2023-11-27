@@ -118,46 +118,6 @@ public class P04_Consultas {
     }
 
     // TEST CONSULTA ADICIONAL 2
-    @Test
-    public void test06_recuperaMaquinasAsignadas() {
-
-        List<Object[]> resultado;
-
-        log.info("");
-        log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
-
-        generadorEjemplos.crearEmpleadosSueltos();
-        generadorEjemplos.asignarMaquinasAEmpleados();
-        generadorEjemplos.grabarEmpleados();
-
-        log.info("");
-        log.info("Inicio del test --------------------------------------------------------------------------------------------------");
-        log.info("Objetivo: Prueba de la consulta Empleado.recuperaMaquinasAsignadas\n");
-
-
-        resultado = empDao.recuperaMaquinasAsignadas();
-
-
-        // Aserciones para cada elemento esperado en la lista
-        // Primer elemento [e0][m0]
-        Object[] primerElemento = resultado.get(0);
-        Assert.assertEquals("e0", primerElemento[0]);
-        Assert.assertEquals("m0", primerElemento[1]);
-
-        // Segundo elemento [e1][m0]
-        Object[] segundoElemento = resultado.get(1);
-        Assert.assertEquals("e1", segundoElemento[0]);
-        Assert.assertEquals("m0", segundoElemento[1]);
-
-        // Tercer elemento [e1][m1]
-        Object[] tercerElemento = resultado.get(2);
-        Assert.assertEquals("e1", tercerElemento[0]);
-        Assert.assertEquals("m1", tercerElemento[1]);
-
-    }
-
-
-    // TEST CONSULTA ADICIONAL 3
 
     @Test
     public void test06_recuperaMaquinasEmpresa() {
@@ -186,7 +146,7 @@ public class P04_Consultas {
     }
 
 
-    // TEST CONSULTA ADICIONAL 4
+    // TEST CONSULTA ADICIONAL 3
     @Test
     public void test06_numeroCobraMasDe1500() {
 
@@ -208,11 +168,50 @@ public class P04_Consultas {
         Assert.assertEquals(1, resultado.longValue());
 
         generadorEjemplos.e1.setSalario(2000.0);
-        empDao.almacena(generadorEjemplos.e1);
+        empDao.modifica(generadorEjemplos.e1);
 
         resultado = empDao.numeroCobraMasDe1500();
         Assert.assertEquals(2, resultado.longValue());
 
+
+    }
+
+    // TEST CONSULTA ADICIONAL 4
+    @Test
+    public void test06_recuperaMaquinasAsignadas() {
+
+        List<Object[]> resultado;
+
+        log.info("");
+        log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
+
+        generadorEjemplos.asignarMaquinasAEmpleados();
+        generadorEjemplos.grabarClientes();
+        generadorEjemplos.grabarEmpleados();
+
+        log.info("");
+        log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+        log.info("Objetivo: Prueba de la consulta Empleado.recuperaMaquinasAsignadas\n");
+
+
+        resultado = empDao.recuperaMaquinasAsignadas();
+
+
+        // Aserciones para cada elemento esperado en la lista
+        // Primer elemento [e0][m0]
+        Object[] primerElemento = resultado.get(0);
+        Assert.assertEquals(generadorEjemplos.e0, primerElemento[0]);
+        Assert.assertEquals(generadorEjemplos.m0, primerElemento[1]);
+
+        // Segundo elemento [e1][m0]
+        Object[] segundoElemento = resultado.get(1);
+        Assert.assertEquals(generadorEjemplos.e1, segundoElemento[0]);
+        Assert.assertEquals(generadorEjemplos.m0, segundoElemento[1]);
+
+        // Tercer elemento [e1][m1]
+        Object[] tercerElemento = resultado.get(2);
+        Assert.assertEquals(generadorEjemplos.e1, tercerElemento[0]);
+        Assert.assertEquals(generadorEjemplos.m1, tercerElemento[1]);
 
     }
 

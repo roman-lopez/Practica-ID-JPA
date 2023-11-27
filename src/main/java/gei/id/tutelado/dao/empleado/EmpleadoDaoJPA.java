@@ -28,7 +28,7 @@ public class EmpleadoDaoJPA extends PersonaDaoJPA implements EmpleadoDao {
 
     @Override
     public Empleado restauraMaquinas(Empleado empleado) {
-        // Devolve o obxecto user coa coleccion de entradas cargada (se non o estaba xa)
+        // Devuelve el objeto empleado con la coleccion de maquinas cargada (si no lo estaba ya)
 
         try {
             em = emf.createEntityManager();
@@ -41,8 +41,8 @@ public class EmpleadoDaoJPA extends PersonaDaoJPA implements EmpleadoDao {
 
                 {
 
-                    /* Volve a ligar o obxecto usuario a un novo CP,
-                     * e accede á propiedade nese momento, para que Hibernate a cargue.*/
+                    /* Vuelve a ligar el objeto empleado a un nuevo CP,
+                     * y accede a la propiedad en ese momento, para que Hibernate la cargue.*/
                     empleado = em.merge(empleado);
                     empleado.getMaquinas().size();
 

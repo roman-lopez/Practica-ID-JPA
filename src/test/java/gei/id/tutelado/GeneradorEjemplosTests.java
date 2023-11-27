@@ -136,6 +136,7 @@ public class GeneradorEjemplosTests {
             em = emf.createEntityManager();
             em.getTransaction().begin();
 
+
             Iterator<Cliente> itC = this.listaC.iterator();
             while (itC.hasNext()) {
                 Cliente c = itC.next();
