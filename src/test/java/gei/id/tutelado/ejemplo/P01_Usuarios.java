@@ -1,4 +1,4 @@
-package gei.id.tutelado;
+package gei.id.tutelado.ejemplo;
 
 import gei.id.tutelado.configuracion.ConfiguracionJPA;
 import gei.id.tutelado.configuracion.Configuracion;

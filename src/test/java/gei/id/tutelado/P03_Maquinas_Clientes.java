@@ -1,5 +1,7 @@
 package gei.id.tutelado;
 
+import gei.id.tutelado.dao.cliente.ClienteDao;
+import gei.id.tutelado.model.EntradaLog;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 
@@ -21,15 +23,15 @@ import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class P03_Maquinas_Clientes {/*
+public class P03_Maquinas_Clientes {
 
     private Logger log = LogManager.getLogger("gei.id.tutelado");
 
     private static GeneradorEjemplosTests generadorEjemplos = new GeneradorEjemplosTests();
 
     private static Configuracion cfg;
-    private static PersonaDao clienteDao;
-    private static PersonaDao empleadoDao;
+    private static ClienteDao clienteDao;
+    //private static PersonaDao empleadoDao;
     private static MaquinaDao maquinaDao;
 
     @Rule
@@ -56,8 +58,8 @@ public class P03_Maquinas_Clientes {/*
         clienteDao = new ClienteDaoJPA();
         clienteDao.setup(cfg);
 
-        empleadoDao = new EmpleadoDaoJPA();
-        empleadoDao.setup(cfg);
+        //empleadoDao = new EmpleadoDaoJPA();
+        //empleadoDao.setup(cfg);
 
         maquinaDao = new MaquinaDaoJPA();
         maquinaDao.setup(cfg);
@@ -82,82 +84,8 @@ public class P03_Maquinas_Clientes {/*
     public void tearDown() throws Exception {
     }
 
-    public void test01_RecuperacionClientes() {
 
-        Cliente c;
-
-        log.info("");
-        log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
-
-        generadorEjemplos.crearClientesSueltos();
-        generadorEjemplos.grabarClientes();
-
-        log.info("");
-        log.info("Inicio del test --------------------------------------------------------------------------------------------------");
-        log.info("Objetivo: Prueba de recuperación desde la BD de cliente (sin maquinas asociadas) por nif\n"
-                + "\t\t\t\t Casos contemplados:\n"
-                + "\t\t\t\t a) Recuperación por nif existente\n"
-                + "\t\t\t\t b) Recuperacion por nif inexistente\n");
-
-        // Situación de partida:
-        // c0 desligado
-
-        log.info("Probando recuperacion por nif EXISTENTE --------------------------------------------------");
-
-        c = clienteDao.recuperaPorNif(generadorEjemplos.c0.getNif());
-        Assert.assertEquals(generadorEjemplos.c0.getNif(),      c.getNif());
-        Assert.assertEquals(generadorEjemplos.c0.getNombrePila(),     c.getNombrePila());
-        Assert.assertEquals(generadorEjemplos.c0.getApellidos(), c.getApellidos());
-        Assert.assertEquals(generadorEjemplos.c0.getApellidos(), c.getApellidos());
-        Assert.assertEquals(generadorEjemplos.c0.getTipoCliente(), c.getTipoCliente());
-
-        log.info("");
-        log.info("Probando recuperacion por nif INEXISTENTE -----------------------------------------------");
-
-        c = clienteDao.recuperaPorNif("iwbvyhuebvuwebvi");
-        Assert.assertNull (c);
-
-    }
-
-    public void test02_RecuperacionEmpleados() {
-
-        Empleado e;
-
-        log.info("");
-        log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
-
-        generadorEjemplos.crearEmpleadosSueltos();
-        generadorEjemplos.grabarEmpleados();
-
-        log.info("");
-        log.info("Inicio del test --------------------------------------------------------------------------------------------------");
-        log.info("Objetivo: Prueba de recuperación desde la BD de cliente (sin maquinas asociadas) por nif\n"
-                + "\t\t\t\t Casos contemplados:\n"
-                + "\t\t\t\t a) Recuperación por nif existente\n"
-                + "\t\t\t\t b) Recuperacion por nif inexistente\n");
-
-        // Situación de partida:
-        // e0 desligado
-
-        log.info("Probando recuperacion por nif EXISTENTE --------------------------------------------------");
-
-        e = empleadoDao.recuperaPorNif(generadorEjemplos.e0.getNif());
-        Assert.assertEquals(generadorEjemplos.e0.getNif(),      e.getNif());
-        Assert.assertEquals(generadorEjemplos.e0.getNombrePila(),     e.getNombrePila());
-        Assert.assertEquals(generadorEjemplos.e0.getApellidos(), e.getApellidos());
-        Assert.assertEquals(generadorEjemplos.e0.getApellidos(), e.getApellidos());
-        Assert.assertEquals(generadorEjemplos.e0.getFechaContratacion(), e.getFechaContratacion());
-        Assert.assertEquals(generadorEjemplos.e0.getSalario(), e.getSalario());
-
-        log.info("");
-        log.info("Probando recuperacion por nif INEXISTENTE -----------------------------------------------");
-
-        e = empleadoDao.recuperaPorNif("iwbvyhuebvuwebvi");
-        Assert.assertNull (e);
-
-    }
-
-    public void test03_RecuperacionMaquinas() {
+    public void test01_Recuperacion() {
 
         Maquina m;
 
@@ -196,141 +124,102 @@ public class P03_Maquinas_Clientes {/*
 
 
     @Test
-    public void test01_AltaClientes() {
+    public void test02_Alta() {
+
 
         log.info("");
-        log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+        log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
         generadorEjemplos.crearClientesSueltos();
+        generadorEjemplos.grabarClientes();
+        generadorEjemplos.crearMaquinasSueltas();
 
         log.info("");
         log.info("Inicio del test --------------------------------------------------------------------------------------------------");
-        log.info("Objetivo: Prueba de grabación en la BD de nuevo cliente (sin máquinas asociadas)\n");
-
-        // Situación de partida:
-        // c0 transitorio
-
-        Assert.assertNull(generadorEjemplos.c0.getIdPersona());
-        clienteDao.almacena(generadorEjemplos.c0);
-        Assert.assertNotNull(generadorEjemplos.c0.getIdPersona());
-    }
-
-    @Test
-    public void test02_AltaEmpleados() {
-
-        log.info("");
-        log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
-
-        generadorEjemplos.crearEmpleadosSueltos();
-
-        log.info("");
-        log.info("Inicio del test --------------------------------------------------------------------------------------------------");
-        log.info("Objetivo: Prueba de grabación en la BD de nuevo empleado (sin máquinas asociadas)\n");
-
-        // Situación de partida:
-        // c0 transitorio
-
-        Assert.assertNull(generadorEjemplos.e0.getIdPersona());
-        empleadoDao.almacena(generadorEjemplos.e0);
-        Assert.assertNotNull(generadorEjemplos.e0.getIdPersona());
-    }
-
-    @Test
-    public void test03_AltaMaquinas() {
-
-        log.info("");
-        log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
-
-        produtorDatos.creaUsuariosSoltos();
-        produtorDatos.gravaUsuarios();
-        produtorDatos.creaEntradasLogSoltas();
-
-        log.info("");
-        log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-        log.info("Obxectivo: Proba da gravación de entradas de log soltas\n"
+        log.info("Objetivo: Prueba de grabación de maquinas sueltas\n"
                 + "\t\t\t\t Casos contemplados:\n"
-                + "\t\t\t\t a) Primeira entrada de log vinculada a un usuario\n"
-                + "\t\t\t\t b) Nova entrada de log para un usuario con entradas previas\n");
+                + "\t\t\t\t a) Primera maquina vinculada a un cliente\n"
+                + "\t\t\t\t b) Nueva maquina para un cliente con maquinas ya asignadas\n");
 
         // Situación de partida:
-        // u1 desligado
-        // e1A, e1B transitorios
+        // c0 desligado
+        // m0, m1 transitorias
 
-        produtorDatos.u1.engadirEntradaLog(produtorDatos.e1A);
-
-        log.info("");
-        log.info("Gravando primeira entrada de log dun usuario --------------------------------------------------------------------");
-        Assert.assertNull(produtorDatos.e1A.getId());
-        logDao.almacena(produtorDatos.e1A);
-        Assert.assertNotNull(produtorDatos.e1A.getId());
-
-        produtorDatos.u1.engadirEntradaLog(produtorDatos.e1B);
+        generadorEjemplos.c0.agregarMaquina(generadorEjemplos.m0);
 
         log.info("");
-        log.info("Gravando segunda entrada de log dun usuario ---------------------------------------------------------------------");
-        Assert.assertNull(produtorDatos.e1B.getId());
-        logDao.almacena(produtorDatos.e1B);
-        Assert.assertNotNull(produtorDatos.e1B.getId());
+        log.info("Grabando primera maquina de un cliente --------------------------------------------------------------------");
+        Assert.assertNull(generadorEjemplos.m0.getIdMaquina());
+        maquinaDao.almacena(generadorEjemplos.m0);
+        Assert.assertNotNull(generadorEjemplos.m0.getIdMaquina());
+
+        generadorEjemplos.c0.agregarMaquina(generadorEjemplos.m1);
+
+        log.info("");
+        log.info("Gravando segunda maquina de un cliente ---------------------------------------------------------------------");
+        Assert.assertNull(generadorEjemplos.m1.getIdMaquina());
+        maquinaDao.almacena(generadorEjemplos.m1);
+        Assert.assertNotNull(generadorEjemplos.m1.getIdMaquina());
 
     }
-
-
-
 
     @Test
     public void test03_Eliminacion() {
 
         log.info("");
-        log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+        log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
-        produtorDatos.creaUsuariosSoltos();
-        produtorDatos.gravaUsuarios();
-
+        generadorEjemplos.crearClientesConMaquinas();
+        generadorEjemplos.grabarClientes();
 
         log.info("");
-        log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-        log.info("Obxectivo: Proba de eliminación da BD de usuario sen entradas asociadas\n");
+        log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+        log.info("Objetivo: Prueba de eliminación de maquina suelta (asignada a un cliente)\n");
 
         // Situación de partida:
-        // u0 desligado
+        // m0 desligado
 
-        Assert.assertNotNull(usuDao.recuperaPorNif(produtorDatos.u0.getNif()));
-        usuDao.elimina(produtorDatos.u0);
-        Assert.assertNull(usuDao.recuperaPorNif(produtorDatos.u0.getNif()));
+        Assert.assertNotNull(maquinaDao.recuperaPorCodigo(generadorEjemplos.m0.getCodMaquina()));
+        maquinaDao.elimina(generadorEjemplos.m0);
+        Assert.assertNull(maquinaDao.recuperaPorCodigo(generadorEjemplos.m0.getCodMaquina()));
+
     }
 
     @Test
     public void test04_Modificacion() {
 
-        Usuario u1, u2;
-        String novoNome;
+        Maquina m1, m2;
+        String nuevoModelo;
 
         log.info("");
-        log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+        log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
-        produtorDatos.creaUsuariosSoltos();
-        produtorDatos.gravaUsuarios();
+        generadorEjemplos.crearClientesConMaquinas();
+        generadorEjemplos.grabarClientes();
 
         log.info("");
-        log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-        log.info("Obxectivo: Proba de modificación da información básica dun usuario sen entradas de log\n");
+        log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+        log.info("Objetivo: Prueba de modificación de la información de una maquina suelta\n");
+
 
         // Situación de partida:
-        // u0 desligado
+        // m0 desligada
 
-        novoNome = new String ("Nome novo");
+        nuevoModelo = new String ("Modelo nuevo");
 
-        u1 = usuDao.recuperaPorNif(produtorDatos.u0.getNif());
-        Assert.assertNotEquals(novoNome, u1.getNome());
-        u1.setNome(novoNome);
+        m1 = maquinaDao.recuperaPorCodigo(generadorEjemplos.m0.getCodMaquina());
 
-        usuDao.modifica(u1);
+        Assert.assertNotEquals(nuevoModelo, m1.getModelo());
+        m1.setModelo(nuevoModelo);
 
-        u2 = usuDao.recuperaPorNif(produtorDatos.u0.getNif());
-        Assert.assertEquals (novoNome, u2.getNome());
+        maquinaDao.modifica(m1);
+
+        m2 = maquinaDao.recuperaPorCodigo(generadorEjemplos.m0.getCodMaquina());
+        Assert.assertEquals (nuevoModelo, m2.getModelo());
 
     }
 
+    /*
     @Test
     public void test09_Excepcions() {
 

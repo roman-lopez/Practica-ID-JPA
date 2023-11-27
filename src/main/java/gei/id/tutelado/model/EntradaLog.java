@@ -95,11 +95,8 @@ public class EntradaLog implements Comparable<EntradaLog> {
 			return false;
 		EntradaLog other = (EntradaLog) obj;
 		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
-			return false;
-		return true;
+			return other.codigo == null;
+		} else return codigo.equals(other.codigo);
 	}
 
 	@Override

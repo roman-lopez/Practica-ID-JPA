@@ -1,4 +1,4 @@
-package gei.id.tutelado.dao;
+package gei.id.tutelado.dao.ejemplo;
 
 import java.util.List;
 

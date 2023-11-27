@@ -1,4 +1,4 @@
-package gei.id.tutelado;
+package gei.id.tutelado.ejemplo;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

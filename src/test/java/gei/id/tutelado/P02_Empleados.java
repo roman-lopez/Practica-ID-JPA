@@ -9,6 +9,7 @@ import gei.id.tutelado.dao.empleado.EmpleadoDaoJPA;
 import gei.id.tutelado.dao.maquina.MaquinaDao;
 import gei.id.tutelado.dao.maquina.MaquinaDaoJPA;
 import gei.id.tutelado.dao.persona.PersonaDao;
+import gei.id.tutelado.model.Cliente;
 import gei.id.tutelado.model.Empleado;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,9 +27,9 @@ public class P02_Empleados {
     private static GeneradorEjemplosTests generadorEjemplos = new GeneradorEjemplosTests();
 
     private static Configuracion cfg;
-    private static ClienteDao clienteDao;
+    //private static ClienteDao clienteDao;
     private static EmpleadoDao empleadoDao;
-    private static MaquinaDao maquinaDao;
+    //private static MaquinaDao maquinaDao;
 
     @Rule
     public TestRule watcher = new TestWatcher() {
@@ -51,14 +52,14 @@ public class P02_Empleados {
         cfg = new ConfiguracionJPA();
         cfg.start();
 
-        clienteDao = new ClienteDaoJPA();
-        clienteDao.setup(cfg);
+        //clienteDao = new ClienteDaoJPA();
+        //clienteDao.setup(cfg);
 
         empleadoDao = new EmpleadoDaoJPA();
         empleadoDao.setup(cfg);
 
-        maquinaDao = new MaquinaDaoJPA();
-        maquinaDao.setup(cfg);
+        //maquinaDao = new MaquinaDaoJPA();
+        //maquinaDao.setup(cfg);
 
         generadorEjemplos = new GeneradorEjemplosTests();
         generadorEjemplos.Setup(cfg);
@@ -161,38 +162,39 @@ public class P02_Empleados {
         Assert.assertNull(empleadoDao.recuperaPorNif(generadorEjemplos.e0.getNif()));
     }
 
-    /*@Test
+    @Test
     public void test04_Modificacion() {
 
-        Usuario u1, u2;
-        String novoNome;
+        Empleado e1, e2;
+        String nuevoNombre;
 
         log.info("");
-        log.info("Configurando situación de partida do test -----------------------------------------------------------------------");
+        log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
 
-        produtorDatos.creaUsuariosSoltos();
-        produtorDatos.gravaUsuarios();
+        generadorEjemplos.crearEmpleadosSueltos();
+        generadorEjemplos.grabarEmpleados();
 
         log.info("");
-        log.info("Inicio do test --------------------------------------------------------------------------------------------------");
-        log.info("Obxectivo: Proba de modificación da información básica dun usuario sen entradas de log\n");
+        log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+        log.info("Objetivo: Prueba de modificación de la información básica de un empleado sin máquinas\n");
 
         // Situación de partida:
-        // u0 desligado
+        // e0 desligado
 
-        novoNome = new String ("Nome novo");
+        nuevoNombre = new String ("Nombre nuevo");
 
-        u1 = usuDao.recuperaPorNif(produtorDatos.u0.getNif());
-        Assert.assertNotEquals(novoNome, u1.getNome());
-        u1.setNome(novoNome);
+        e1 = empleadoDao.recuperaPorNif(generadorEjemplos.e0.getNif());
+        Assert.assertNotEquals(nuevoNombre, e1.getNombrePila());
+        e1.setNombrePila(nuevoNombre);
 
-        usuDao.modifica(u1);
+        empleadoDao.modifica(e1);
 
-        u2 = usuDao.recuperaPorNif(produtorDatos.u0.getNif());
-        Assert.assertEquals (novoNome, u2.getNome());
+        e2 = empleadoDao.recuperaPorNif(generadorEjemplos.e0.getNif());
+        Assert.assertEquals (nuevoNombre, e2.getNombrePila());
 
     }
 
+    /*
     @Test
     public void test09_Excepcions() {
 
@@ -237,6 +239,8 @@ public class P02_Empleados {
             log.info(ex.getClass().getName());
         }
         Assert.assertTrue(excepcion);
-    }*/
+    }
+    */
+
 
 }

@@ -1,4 +1,4 @@
-package gei.id.tutelado;
+package gei.id.tutelado.ejemplo;
 
 import gei.id.tutelado.configuracion.Configuracion;
 import gei.id.tutelado.configuracion.ConfiguracionJPA;
@@ -6,6 +6,7 @@ import gei.id.tutelado.dao.ejemplo.EntradaLogDao;
 import gei.id.tutelado.dao.ejemplo.EntradaLogDaoJPA;
 import gei.id.tutelado.dao.ejemplo.UsuarioDao;
 import gei.id.tutelado.dao.ejemplo.UsuarioDaoJPA;
+import gei.id.tutelado.ejemplo.ProdutorDatosProba;
 import gei.id.tutelado.model.EntradaLog;
 import gei.id.tutelado.model.Usuario;
 

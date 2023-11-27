@@ -27,8 +27,8 @@ public class P01_Clientes {
 
     private static Configuracion cfg;
     private static ClienteDao clienteDao;
-    private static EmpleadoDao empleadoDao;
-    private static MaquinaDao maquinaDao;
+    //private static EmpleadoDao empleadoDao;
+    //private static MaquinaDao maquinaDao;
 
     @Rule
     public TestRule watcher = new TestWatcher() {
@@ -54,11 +54,11 @@ public class P01_Clientes {
         clienteDao = new ClienteDaoJPA();
         clienteDao.setup(cfg);
 
-        empleadoDao = new EmpleadoDaoJPA();
+        /*empleadoDao = new EmpleadoDaoJPA();
         empleadoDao.setup(cfg);
 
         maquinaDao = new MaquinaDaoJPA();
-        maquinaDao.setup(cfg);
+        maquinaDao.setup(cfg);*/
 
         generadorEjemplos = new GeneradorEjemplosTests();
         generadorEjemplos.Setup(cfg);
@@ -161,7 +161,7 @@ public class P01_Clientes {
         Assert.assertNull(clienteDao.recuperaPorNif(generadorEjemplos.c0.getNif()));
     }
 
-    /*@Test
+    @Test
     public void test04_Modificacion() {
 
         Cliente c1, c2;
@@ -178,21 +178,22 @@ public class P01_Clientes {
         log.info("Objetivo: Prueba de modificación de la información básica de un cliente sin máquinas\n");
 
         // Situación de partida:
-        // u0 desligado
+        // c0 desligado
 
-        novoNome = new String ("Nome novo");
+        nuevoNombre = new String ("Nombre nuevo");
 
-        u1 = usuDao.recuperaPorNif(produtorDatos.u0.getNif());
-        Assert.assertNotEquals(novoNome, u1.getNome());
-        u1.setNome(novoNome);
+        c1 = clienteDao.recuperaPorNif(generadorEjemplos.c0.getNif());
+        Assert.assertNotEquals(nuevoNombre, c1.getNombrePila());
+        c1.setNombrePila(nuevoNombre);
 
-        usuDao.modifica(u1);
+        clienteDao.modifica(c1);
 
-        u2 = usuDao.recuperaPorNif(produtorDatos.u0.getNif());
-        Assert.assertEquals (novoNome, u2.getNome());
+        c2 = clienteDao.recuperaPorNif(generadorEjemplos.c0.getNif());
+        Assert.assertEquals (nuevoNombre, c2.getNombrePila());
 
     }
 
+    /*
     @Test
     public void test09_Excepcions() {
 
@@ -237,6 +238,7 @@ public class P01_Clientes {
             log.info(ex.getClass().getName());
         }
         Assert.assertTrue(excepcion);
-    }*/
+    }
+     */
 
 }

@@ -11,10 +11,14 @@ import javax.persistence.*;
 @NamedQueries ({
         @NamedQuery (name="Maquina.recuperaPorCodigo",
                 query="SELECT m FROM Maquina m where m.codMaquina=:codMaquina"),
-        @NamedQuery (name="Maquina.recuperaTodasPropietario",
-                query="SELECT m FROM Maquina m JOIN m.propietario p WHERE p=:p"),
         @NamedQuery (name="Maquina.recuperaTodas",
-                query="SELECT m FROM Maquina m")
+                query="SELECT m FROM Maquina m"),
+
+        @NamedQuery (name="Maquina.recuperaTodasPropietario",
+                query="SELECT m FROM Maquina m JOIN m.propietario c WHERE c=:c"),
+        @NamedQuery (name="Maquina.recuperaMaquinasEmpresa",
+                query="SELECT m FROM Maquina m WHERE m.propietario IN " +
+                "SELECT c FROM Cliente c WHERE c.tipoCliente=:'EMPRESA'")
 })
 
 @Entity

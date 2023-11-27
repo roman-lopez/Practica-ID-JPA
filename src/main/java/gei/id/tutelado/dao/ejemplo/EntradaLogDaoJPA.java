@@ -1,4 +1,4 @@
-package gei.id.tutelado.dao;
+package gei.id.tutelado.dao.ejemplo;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 import gei.id.tutelado.configuracion.Configuracion;
+import gei.id.tutelado.dao.ejemplo.EntradaLogDao;
 import gei.id.tutelado.model.EntradaLog;
 import gei.id.tutelado.model.Usuario;
 
