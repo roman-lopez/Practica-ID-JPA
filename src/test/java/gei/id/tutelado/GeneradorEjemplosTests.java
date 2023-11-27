@@ -86,12 +86,14 @@ public class GeneradorEjemplosTests {
         this.e0.setNombrePila("PrimerE");
         this.e0.setApellidos("Empleado Uno");
         this.e0.setFechaContratacion(LocalDateTime.of(2000,1,1,0,0));
+        this.e0.setSalario(1800.0);
 
         this.e1 = new Empleado();
         this.e1.setNif("333D");
         this.e1.setNombrePila("SegundoE");
         this.e1.setApellidos("Empleado Dos");
         this.e1.setFechaContratacion(LocalDateTime.of(2001,1,1,0,0));
+        this.e1.setSalario(1200.0);
 
 
         this.listaE = new ArrayList<Empleado>();

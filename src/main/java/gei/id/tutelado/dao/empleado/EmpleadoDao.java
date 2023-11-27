@@ -18,9 +18,9 @@ public interface EmpleadoDao extends PersonaDao {
     void setup (Configuracion config);
 
     //QUERIES ADICIONALES
-    //Long numeroCobraMasDe1500();
+    Long numeroCobraMasDe1500();
 
-    //List<Object[]> recuperaMaquinasAsignadas();
+    List<Object[]> recuperaMaquinasAsignadas();
 
     // OPERACIONES POR ATRIBUTOS LAZY
     Empleado restauraMaquinas(Empleado empleado);
