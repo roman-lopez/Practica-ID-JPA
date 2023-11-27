@@ -3,6 +3,7 @@ package gei.id.tutelado.dao.empleado;
 import gei.id.tutelado.configuracion.Configuracion;
 import gei.id.tutelado.dao.persona.PersonaDao;
 import gei.id.tutelado.model.Empleado;
+import gei.id.tutelado.model.EmpleadoDTO;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface EmpleadoDao extends PersonaDao {
     //QUERIES ADICIONALES
     Long numeroCobraMasDe1500();
 
-    List<Object[]> recuperaMaquinasAsignadas();
+    List<EmpleadoDTO> recuperaMaquinasAsignadas();
 
     // OPERACIONES POR ATRIBUTOS LAZY
     Empleado restauraMaquinas(Empleado empleado);

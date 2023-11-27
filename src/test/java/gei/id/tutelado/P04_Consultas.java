@@ -8,6 +8,7 @@ import gei.id.tutelado.dao.empleado.*;
 import gei.id.tutelado.dao.maquina.*;
 import gei.id.tutelado.GeneradorEjemplosTests;
 import gei.id.tutelado.ejemplo.ProdutorDatosProba;
+import gei.id.tutelado.model.EmpleadoDTO;
 import gei.id.tutelado.model.EntradaLog;
 import gei.id.tutelado.model.Maquina;
 import org.junit.After;
@@ -121,7 +122,7 @@ public class P04_Consultas {
     @Test
     public void test06_recuperaMaquinasAsignadas() {
 
-        List<Object[]> resultado;
+        List<EmpleadoDTO> resultado;
 
         log.info("");
         log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
@@ -140,19 +141,16 @@ public class P04_Consultas {
 
         // Aserciones para cada elemento esperado en la lista
         // Primer elemento [e0][m0]
-        Object[] primerElemento = resultado.get(0);
-        Assert.assertEquals("e0", primerElemento[0]);
-        Assert.assertEquals("m0", primerElemento[1]);
+        Assert.assertEquals(generadorEjemplos.e0, resultado.get(0).getEmpleado());
+        Assert.assertEquals(generadorEjemplos.m0, resultado.get(0).getMaquina());
 
         // Segundo elemento [e1][m0]
-        Object[] segundoElemento = resultado.get(1);
-        Assert.assertEquals("e1", segundoElemento[0]);
-        Assert.assertEquals("m0", segundoElemento[1]);
+        Assert.assertEquals(generadorEjemplos.e1, resultado.get(1).getEmpleado());
+        Assert.assertEquals(generadorEjemplos.m0, resultado.get(1).getMaquina());
 
         // Tercer elemento [e1][m1]
-        Object[] tercerElemento = resultado.get(2);
-        Assert.assertEquals("e1", tercerElemento[0]);
-        Assert.assertEquals("m1", tercerElemento[1]);
+        Assert.assertEquals(generadorEjemplos.e1, resultado.get(2).getEmpleado());
+        Assert.assertEquals(generadorEjemplos.m1, resultado.get(2).getMaquina());
 
     }
 

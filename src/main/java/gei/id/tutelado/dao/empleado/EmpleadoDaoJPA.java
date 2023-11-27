@@ -10,6 +10,7 @@ import gei.id.tutelado.dao.empleado.EmpleadoDao;
 import gei.id.tutelado.dao.persona.PersonaDaoJPA;
 import gei.id.tutelado.model.Cliente;
 import gei.id.tutelado.model.Empleado;
+import gei.id.tutelado.model.EmpleadoDTO;
 import org.hibernate.LazyInitializationException;
 
 import gei.id.tutelado.configuracion.Configuracion;
@@ -89,15 +90,15 @@ public class EmpleadoDaoJPA extends PersonaDaoJPA implements EmpleadoDao {
         return resultado;
     }
 
-    public List<Object[]> recuperaMaquinasAsignadas() {
-        List<Object[]> resultado = null;
+    public List<EmpleadoDTO> recuperaMaquinasAsignadas() {
+        List<EmpleadoDTO> resultado = null;
 
         // Tengo que hacer una List de Objects en vez de Set porque el getResultList() devuelve una lista
         try {
             em = emf.createEntityManager();
             em.getTransaction().begin();
 
-            resultado = em.createNamedQuery("Empleado.recuperaMaquinasAsignadas", Object[].class).getResultList();
+            resultado = em.createNamedQuery("Empleado.recuperaMaquinasAsignadas", EmpleadoDTO.class).getResultList();
 
             em.getTransaction().commit();
             em.close();
