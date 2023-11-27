@@ -178,6 +178,11 @@ public class P04_Consultas {
         listaM = maqDao.recuperaMaquinasEmpresa();
         Assert.assertEquals(0, listaM.size());
 
+        generadorEjemplos.c1.agregarMaquina(generadorEjemplos.m2);
+        maqDao.almacena(generadorEjemplos.m2);
+        listaM = maqDao.recuperaMaquinasEmpresa();
+        Assert.assertEquals(1, listaM.size());
+
     }
 
 

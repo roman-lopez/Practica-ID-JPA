@@ -23,7 +23,7 @@ public class GeneradorEjemplosTests {
     public Cliente c0, c1;
     public List<Cliente> listaC;
 
-    public Maquina m0, m1;
+    public Maquina m0, m1, m2;
     public List<Maquina> listaM;
 
     public Empleado e0, e1;
@@ -70,9 +70,14 @@ public class GeneradorEjemplosTests {
         this.m1.setCodMaquina("M002");
         this.m1.setModelo("Modelo2");
 
+        this.m2 = new Maquina();
+        this.m2.setCodMaquina("M003");
+        this.m2.setModelo("Modelo3");
+
         this.listaM = new ArrayList<Maquina>();
         this.listaM.add(0,m0);
         this.listaM.add(1,m1);
+        this.listaM.add(2,m2);
 
     }
 
