@@ -80,6 +80,7 @@ public class P01_Clientes {
     public void tearDown() throws Exception {
     }
 
+    @Test
     public void test01_Recuperacion() {
 
         Cliente c;
@@ -134,7 +135,10 @@ public class P01_Clientes {
 
         Assert.assertNull(generadorEjemplos.c0.getIdPersona());
         clienteDao.almacena(generadorEjemplos.c0);
-        Assert.assertNotNull(generadorEjemplos.c0.getIdPersona());
+
+        System.out.println(" sgf");
+        Cliente cliente = clienteDao.recuperaPorNif(generadorEjemplos.c0.getNif());
+        Assert.assertNotNull(cliente);
     }
 
 

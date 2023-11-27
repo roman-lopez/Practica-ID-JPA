@@ -20,6 +20,7 @@ public class ClienteDaoJPA extends PersonaDaoJPA implements ClienteDao{
     @Override
     public void setup(Configuracion config) {
         this.emf = (EntityManagerFactory) config.get("EMF");
+        super.setup(config);
     }
 
     @Override

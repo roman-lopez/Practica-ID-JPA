@@ -18,6 +18,8 @@
 	        <class>gei.id.tutelado.model.Empleado</class>
 			<class>gei.id.tutelado.model.Persona</class>
 			<class>gei.id.tutelado.model.Maquina</class>
+			<class>gei.id.tutelado.model.Usuario</class>
+			<class>gei.id.tutelado.model.EntradaLog</class>
        
 	        <exclude-unlisted-classes>true</exclude-unlisted-classes>
 

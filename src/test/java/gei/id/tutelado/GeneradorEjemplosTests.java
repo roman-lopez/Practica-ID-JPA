@@ -85,6 +85,7 @@ public class GeneradorEjemplosTests {
         this.e0.setNif("222C");
         this.e0.setNombrePila("PrimerE");
         this.e0.setApellidos("Empleado Uno");
+        this.e0.setSalario(1700.0);
         this.e0.setFechaContratacion(LocalDateTime.of(2000,1,1,0,0));
         this.e0.setSalario(1800.0);
 
@@ -92,6 +93,7 @@ public class GeneradorEjemplosTests {
         this.e1.setNif("333D");
         this.e1.setNombrePila("SegundoE");
         this.e1.setApellidos("Empleado Dos");
+        this.e1.setSalario(1100.0);
         this.e1.setFechaContratacion(LocalDateTime.of(2001,1,1,0,0));
         this.e1.setSalario(1200.0);
 
@@ -191,7 +193,7 @@ public class GeneradorEjemplosTests {
             while (itC.hasNext()) em.remove(itC.next());
             Iterator <Maquina> itM = em.createNamedQuery("Maquina.recuperaTodas", Maquina.class).getResultList().iterator();
             while (itM.hasNext()) em.remove(itM.next());
-            Iterator <Empleado> itE = em.createNamedQuery("Cliente.recuperaTodos", Empleado.class).getResultList().iterator();
+            Iterator <Empleado> itE = em.createNamedQuery("Empleado.recuperaTodos", Empleado.class).getResultList().iterator();
             while (itE.hasNext()) em.remove(itE.next());
 
             em.createNativeQuery("UPDATE tabla_ids SET ultimo_valor_id=0 WHERE nombre_id='idCliente'" ).executeUpdate();
