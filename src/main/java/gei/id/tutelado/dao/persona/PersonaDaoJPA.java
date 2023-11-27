@@ -107,6 +107,7 @@ public class PersonaDaoJPA implements PersonaDao {
             }
         }
 
+        System.out.println(personas);
         return (personas.size()!=0?personas.get(0):null);
     }
 

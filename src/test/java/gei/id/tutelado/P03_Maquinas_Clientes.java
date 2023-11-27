@@ -85,6 +85,7 @@ public class P03_Maquinas_Clientes {
     }
 
 
+    @Test
     public void test01_Recuperacion() {
 
         Maquina m;
