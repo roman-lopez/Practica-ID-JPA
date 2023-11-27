@@ -64,7 +64,7 @@ public class EmpleadoDaoJPA extends PersonaDaoJPA implements EmpleadoDao {
         return (empleado);
 
     }
-/*
+
     @Override
     public Long numeroCobraMasDe1500() {
        Long resultado = null;
@@ -74,7 +74,7 @@ public class EmpleadoDaoJPA extends PersonaDaoJPA implements EmpleadoDao {
             em = emf.createEntityManager();
             em.getTransaction().begin();
 
-            resultado = em.createNamedQuery("Empleado.numeroCobraMasDe", Long.class).getSingleResult();
+            resultado = em.createNamedQuery("Empleado.numeroCobraMasDe1500", Long.class).getSingleResult();
 
             em.getTransaction().commit();
             em.close();
@@ -109,11 +109,11 @@ public class EmpleadoDaoJPA extends PersonaDaoJPA implements EmpleadoDao {
                 throw (ex);
             }
 
-            return (empleados.size() != 0 ? empleados.get(0) : null);
         }
+        return (resultado.size() != 0 ? resultado : null);
     }
 
- */
+
 
     @Override
     public Empleado recuperaPorNif(String nif) {

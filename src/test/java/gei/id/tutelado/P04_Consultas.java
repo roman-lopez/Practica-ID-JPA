@@ -210,6 +210,7 @@ public class P04_Consultas {
         generadorEjemplos.e1.setSalario(2000.0);
         empDao.almacena(generadorEjemplos.e1);
 
+        resultado = empDao.numeroCobraMasDe1500();
         Assert.assertEquals(2, resultado.longValue());
 
 

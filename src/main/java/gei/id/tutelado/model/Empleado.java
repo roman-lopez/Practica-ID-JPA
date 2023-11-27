@@ -7,16 +7,14 @@ import java.util.Set;
 
 
 @NamedQueries({
-        //@NamedQuery (name="Empleado.numeroCobraMasDe1500",
-        //        query="SELECT COUNT(e) FROM Empleado e WHERE e.salario > 1500\""),
+        @NamedQuery (name="Empleado.numeroCobraMasDe1500",
+                query="SELECT COUNT(e) FROM Empleado e WHERE e.salario > 1500"),
         @NamedQuery (name="Empleado.recuperaMaquinas",
                 query="SELECT e FROM Empleado e ORDER BY e.nif"),
         @NamedQuery (name="Empleado.recuperaPorNif",
                 query="SELECT e FROM Empleado e where e.nif=:nif"),
         @NamedQuery (name="Empleado.recuperaTodos",
                 query="SELECT e FROM Empleado e ORDER BY e.nif"),
-        //@NamedQuery (name="Empleado.recuperaMaquinas",
-        //        query="SELECT u FROM Usuario u ORDER BY u.nif"),
         @NamedQuery(name = "Empleado.recuperaMaquinasAsignadas",
                 query = "SELECT e, m FROM Empleado e LEFT JOIN e.maquinas m ORDER BY e.idPersona")
 })

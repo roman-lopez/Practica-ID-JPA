@@ -1,7 +1,8 @@
 package gei.id.tutelado;
 
 import gei.id.tutelado.dao.cliente.ClienteDao;
-import gei.id.tutelado.model.EntradaLog;
+import gei.id.tutelado.model.*;
+import org.hibernate.LazyInitializationException;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 
@@ -12,9 +13,6 @@ import gei.id.tutelado.dao.empleado.EmpleadoDaoJPA;
 import gei.id.tutelado.dao.maquina.MaquinaDao;
 import gei.id.tutelado.dao.maquina.MaquinaDaoJPA;
 import gei.id.tutelado.dao.persona.PersonaDao;
-import gei.id.tutelado.model.Cliente;
-import gei.id.tutelado.model.Empleado;
-import gei.id.tutelado.model.Maquina;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.*;
@@ -281,6 +279,95 @@ public class P03_Maquinas_Clientes {
         Assert.assertNull(maquinaDao.recuperaPorCodigo(generadorEjemplos.m0.getCodMaquina()));
         Assert.assertNull(maquinaDao.recuperaPorCodigo(generadorEjemplos.m1.getCodMaquina()));
 
+    }
+
+    @Test
+    public void test07_EAGER() {
+
+        Maquina m;
+        Boolean excepcion;
+
+        log.info("");
+        log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
+
+        generadorEjemplos.crearClientesConMaquinas();
+        generadorEjemplos.grabarClientes();
+
+        log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+        log.info("Objetivo: Prueba de recuperación de propiedades EAGER\n");
+
+        // Situación de partida:
+        // c0, m0, m1 desligados
+
+        log.info("Probando (que no hay excepcion tras) acceso inicial a la propiedad EAGER fuera de sesion ----------------------------------------");
+
+        m = maquinaDao.recuperaPorCodigo(generadorEjemplos.m0.getCodMaquina());
+        log.info("Acceso a propietario (cliente) de maquina");
+        try	{
+            Assert.assertEquals(generadorEjemplos.c0, m.getPropietario());
+            excepcion=false;
+        } catch (LazyInitializationException ex) {
+            excepcion=true;
+            log.info(ex.getClass().getName());
+        };
+        Assert.assertFalse(excepcion);
+    }
+
+
+    @Test
+    public void test08_LAZY() {
+
+        Cliente c;
+        Maquina m;
+
+        Boolean excepcion;
+
+        log.info("");
+        log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
+
+        generadorEjemplos.crearClientesConMaquinas();
+        generadorEjemplos.grabarClientes();
+
+        log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+        log.info("Objetivo: Prueba de recuperación de propiedades LAZY\n"
+                + "\t\t\t\t Casos contemplados:\n"
+                + "\t\t\t\t a) Recuperación de cliente con colección (LAZY) de maquinas \n"
+                + "\t\t\t\t b) Carga forzada de colección LAZY de dicha coleccion\n"
+                + "\t\t\t\t c) Recuperacion de maquina suelta con referencia (EAGER) a cliente\n");
+
+        // Situación de partida:
+        // c0, m0, m1 desligados
+
+        log.info("Probando (excepcion tras) recuperacion LAZY ---------------------------------------------------------------------");
+
+        c = clienteDao.recuperaPorNif(generadorEjemplos.c0.getNif());
+        log.info("Acceso a maquinas de cliente");
+        try	{
+            Assert.assertEquals(2, c.getMaquinas().size());
+            Assert.assertEquals(generadorEjemplos.m0, c.getMaquinas().iterator().next());
+            Assert.assertEquals(generadorEjemplos.m1, c.getMaquinas().iterator().next());
+            excepcion=false;
+        } catch (LazyInitializationException ex) {
+            excepcion=true;
+            log.info(ex.getClass().getName());
+        };
+        Assert.assertTrue(excepcion);
+
+        log.info("");
+        log.info("Probando carga forzada de coleccion LAZY ------------------------------------------------------------------------");
+
+        c = clienteDao.recuperaPorNif(generadorEjemplos.c0.getNif());   // Cliente c con proxy sin inicializar
+        /*c = clienteDao.re(u);						// Cliente c con proxy ya inicializado
+
+        Assert.assertEquals(2, u.getEntradasLog().size());
+        Assert.assertEquals(produtorDatos.e1A, u.getEntradasLog().first());
+        Assert.assertEquals(produtorDatos.e1B, u.getEntradasLog().last());
+
+        log.info("");
+        log.info("Probando acceso a referencia EAGER ------------------------------------------------------------------------------");
+
+        e = logDao.recuperaPorCodigo(produtorDatos.e1A.getCodigo());
+        Assert.assertEquals(produtorDatos.u1, e.getUsuario());*/
     }
     /*
     @Test
