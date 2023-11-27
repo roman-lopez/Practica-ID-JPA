@@ -219,6 +219,68 @@ public class P03_Maquinas_Clientes {
 
     }
 
+    @Test
+    public void test05_Propagacion_Persist() {
+
+
+        log.info("");
+        log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
+
+        generadorEjemplos.crearClientesSueltos();
+        generadorEjemplos.crearMaquinasSueltas();
+        generadorEjemplos.c0.agregarMaquina(generadorEjemplos.m0);
+        generadorEjemplos.c0.agregarMaquina(generadorEjemplos.m1);
+
+
+        log.info("");
+        log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+        log.info("Objetivo: Prueba de grabación de nuevo cliente con maquinas (nuevas) asociadas\n");
+
+        // Situación de partida:
+        // c0, m0, m1 transitorios
+
+        Assert.assertNull(generadorEjemplos.c0.getIdPersona());
+        Assert.assertNull(generadorEjemplos.m0.getIdMaquina());
+        Assert.assertNull(generadorEjemplos.m1.getIdMaquina());
+
+        log.info("Grabando en la BD cliente con maquinas ----------------------------------------------------------------------");
+
+        // Aqui el persist sobre c0 debe propagarse a m0 y m1
+        clienteDao.almacena(generadorEjemplos.c0);
+
+        Assert.assertNotNull(generadorEjemplos.c0.getIdPersona());
+        Assert.assertNotNull(generadorEjemplos.m0.getIdMaquina());
+        Assert.assertNotNull(generadorEjemplos.m1.getIdMaquina());
+    }
+
+    @Test
+    public void test05_Propagacion_Remove() {
+
+        log.info("");
+        log.info("Configurando situación de partida del test -----------------------------------------------------------------------");
+
+        generadorEjemplos.crearClientesConMaquinas();
+        generadorEjemplos.grabarClientes();
+
+        log.info("");
+        log.info("Inicio del test --------------------------------------------------------------------------------------------------");
+        log.info("Objetivo: Prueba de eliminación de cliente con maquinas asociadas\n");
+
+        // Situación de partida:
+        // c0, m0, m1 desligados
+
+        Assert.assertNotNull(clienteDao.recuperaPorNif(generadorEjemplos.c0.getNif()));
+        Assert.assertNotNull(maquinaDao.recuperaPorCodigo(generadorEjemplos.m0.getCodMaquina()));
+        Assert.assertNotNull(maquinaDao.recuperaPorCodigo(generadorEjemplos.m1.getCodMaquina()));
+
+        // Aqui el remove sobre c0 debe propagarse a m0 y m1
+        clienteDao.elimina(generadorEjemplos.c0);
+
+        Assert.assertNull(clienteDao.recuperaPorNif(generadorEjemplos.c0.getNif()));
+        Assert.assertNull(maquinaDao.recuperaPorCodigo(generadorEjemplos.m0.getCodMaquina()));
+        Assert.assertNull(maquinaDao.recuperaPorCodigo(generadorEjemplos.m1.getCodMaquina()));
+
+    }
     /*
     @Test
     public void test09_Excepcions() {
