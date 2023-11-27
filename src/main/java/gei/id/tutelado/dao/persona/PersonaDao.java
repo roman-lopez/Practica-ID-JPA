@@ -15,5 +15,5 @@ public interface PersonaDao {
     Persona recuperaPorNif (String nif);
 
     //QUERIES ADICIONAIS
-    List<Persona> recuperaTodas();
+    List<Persona> recuperaTodos();
 }

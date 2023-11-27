@@ -112,14 +112,14 @@ public class PersonaDaoJPA implements PersonaDao {
 
 
     @Override
-    public List<Persona> recuperaTodas() {
+    public List<Persona> recuperaTodos() {
         List <Persona> personas=null;
 
         try {
             em = emf.createEntityManager();
             em.getTransaction().begin();
 
-            personas = em.createNamedQuery("Persona.recuperaTodas", Persona.class).getResultList();
+            personas = em.createNamedQuery("Persona.recuperaTodos", Persona.class).getResultList();
 
             em.getTransaction().commit();
             em.close();

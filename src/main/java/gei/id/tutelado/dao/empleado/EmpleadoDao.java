@@ -4,19 +4,23 @@ import gei.id.tutelado.configuracion.Configuracion;
 import gei.id.tutelado.dao.persona.PersonaDao;
 import gei.id.tutelado.model.Empleado;
 
+import java.util.List;
+
 public interface EmpleadoDao extends PersonaDao {
 
 
     @Override
     Empleado recuperaPorNif (String nif);
 
+    @Override
+    List recuperaTodos ();
 
     void setup (Configuracion config);
 
     //QUERIES ADICIONALES
-    Long numeroCobraMasDe1500();
+    //Long numeroCobraMasDe1500();
 
-    List<Object[]> recuperaMaquinasAsignadas();
+    //List<Object[]> recuperaMaquinasAsignadas();
 
     // OPERACIONES POR ATRIBUTOS LAZY
     Empleado restauraMaquinas(Empleado empleado);

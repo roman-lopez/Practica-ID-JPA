@@ -4,10 +4,15 @@ import gei.id.tutelado.configuracion.Configuracion;
 import gei.id.tutelado.dao.persona.PersonaDao;
 import gei.id.tutelado.model.Cliente;
 
+import java.util.List;
+
 public interface ClienteDao extends PersonaDao {
 
     void setup (Configuracion config);
 
     @Override
     Cliente recuperaPorNif (String nif);
+
+    @Override
+    List recuperaTodos ();
 }

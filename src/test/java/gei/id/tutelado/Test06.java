@@ -2,7 +2,7 @@ package gei.id.tutelado;
 
 import gei.id.tutelado.configuracion.Configuracion;
 import gei.id.tutelado.configuracion.ConfiguracionJPA;
-import gei.id.tutelado.dao.*;
+//import gei.id.tutelado.dao.*;
 import gei.id.tutelado.model.EntradaLog;
 import gei.id.tutelado.model.Usuario;
 
@@ -27,7 +27,7 @@ import org.apache.logging.log4j.Logger;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class Test06 {
-
+/*
     private Logger log = LogManager.getLogger("gei.id.tutelado");
 
     private static ProdutorDatosProba produtorDatos = new ProdutorDatosProba();
@@ -131,5 +131,7 @@ public class Test06 {
 
 
     }
+
+ */
 
 }

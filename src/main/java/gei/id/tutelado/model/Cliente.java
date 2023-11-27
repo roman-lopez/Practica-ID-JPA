@@ -4,6 +4,13 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@NamedQueries ({
+        @NamedQuery (name="Cliente.recuperaPorNif",
+                query="SELECT c FROM Cliente c where c.nif=:nif"),
+        @NamedQuery (name="Cliente.recuperaTodos",
+                query="SELECT c FROM Cliente c ORDER BY c.nif"),
+})
+
 @Entity
 public class Cliente extends Persona {
 
@@ -11,7 +18,7 @@ public class Cliente extends Persona {
     @Column(nullable = false, unique=false)
     private String tipoCliente;     //( "PERSONAFISICA  ||  "EMPRESA" )
 
-    @Column(nullable = true, unique=false)
+    @ElementCollection
     private Set<Long> telefonos = new HashSet<Long>();
 
     @OneToMany(mappedBy="propietario", fetch= FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.REMOVE} )

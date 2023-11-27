@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 
 import gei.id.tutelado.dao.empleado.EmpleadoDao;
 import gei.id.tutelado.dao.persona.PersonaDaoJPA;
+import gei.id.tutelado.model.Cliente;
 import gei.id.tutelado.model.Empleado;
 import org.hibernate.LazyInitializationException;
 
@@ -62,7 +63,7 @@ public class EmpleadoDaoJPA extends PersonaDaoJPA implements EmpleadoDao {
         return (empleado);
 
     }
-
+/*
     @Override
     public Long numeroCobraMasDe1500() {
        Long resultado = null;
@@ -111,6 +112,8 @@ public class EmpleadoDaoJPA extends PersonaDaoJPA implements EmpleadoDao {
         }
     }
 
+ */
+
     @Override
     public Empleado recuperaPorNif(String nif) {
         List<Empleado> empleados=null;
@@ -134,6 +137,31 @@ public class EmpleadoDaoJPA extends PersonaDaoJPA implements EmpleadoDao {
         }
 
         return (empleados.size()!=0?empleados.get(0):null);
+    }
+
+    @Override
+    public List recuperaTodos() {
+        List <Empleado> empleados=null;
+
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+
+            empleados = em.createNamedQuery("Empleado.recuperaTodos", Empleado.class).getResultList();
+
+            em.getTransaction().commit();
+            em.close();
+
+        }
+        catch (Exception ex ) {
+            if (em!=null && em.isOpen()) {
+                if (em.getTransaction().isActive()) em.getTransaction().rollback();
+                em.close();
+                throw(ex);
+            }
+        }
+
+        return empleados;
     }
 }
 

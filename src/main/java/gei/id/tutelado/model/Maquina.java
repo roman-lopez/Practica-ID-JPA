@@ -18,7 +18,7 @@ import javax.persistence.*;
                 query="SELECT m FROM Maquina m JOIN m.propietario c WHERE c=:c"),
         @NamedQuery (name="Maquina.recuperaMaquinasEmpresa",
                 query="SELECT m FROM Maquina m WHERE m.propietario IN " +
-                "SELECT c FROM Cliente c WHERE c.tipoCliente=:'EMPRESA'")
+                "(SELECT c FROM Cliente c WHERE c.tipoCliente=:EMPRESA)")
 })
 
 @Entity
