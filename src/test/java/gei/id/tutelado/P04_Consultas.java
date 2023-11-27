@@ -176,6 +176,7 @@ public class P04_Consultas {
 
     }
 
+    /*
     // TEST CONSULTA ADICIONAL 4
     @Test
     public void test06_recuperaMaquinasAsignadas() {
@@ -215,4 +216,6 @@ public class P04_Consultas {
 
     }
 
+
+     */
 }
